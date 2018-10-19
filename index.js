@@ -66,7 +66,7 @@ exports.handler = async (event, context) => {
 
                                 if (lineNumber != 0 && lineNumber % 20000 == 0) {
 
-                                    console.log("Processing line number ", lineNumber, "Byte ", startByte);
+                                    console.log(`Processing line number ${lineNumber} Byte ${startByte}`);
 
                                     this.pause() // pause the stream and wait for bulkIndex of elasticsearch to complete 
                                     let elasticInsert = await HelperController.bulkIndex(elasticBody, true);
@@ -77,6 +77,7 @@ exports.handler = async (event, context) => {
 
                                 // if lambda function remaining time is less than 30 seconds than call SNS to continue process 
                                 if (context.getRemainingTimeInMillis() < 30000 && (!callSNS)) {
+
                                     console.log(`Calling SNS with line ${lineNumber}`);
                                     callSNS = true;
                                     this.end();
@@ -90,9 +91,11 @@ exports.handler = async (event, context) => {
                 .on('end', async function (end) {
                     try {
                         if (elasticBody.length != 0 && (!callSNS)) {
-                            console.log('Completed processing file ' + key + ' with length ', elasticBody.length, 'complete ');
+                            
                             let elasticComplete = await HelperController.bulkIndex(elasticBody, true);
                             elasticBody = elasticComplete;
+                            console.log(`Completed processing file ${key}`);
+                            
                             return resolve(true);
                         } else {
                             console.log(`Calling SNS with line ${lineNumber} bucket ${bucket} key ${key} and completed byte ${completedByte}`);

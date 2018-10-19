@@ -50,7 +50,7 @@ async function bulkIndex(jsonBody) {
 
         await wrapeBulk(jsonBody);  // calling wrape bulk
 
-        console.log("Inserting into elasticSearch with record count ", jsonBody.length);
+        console.log(`Inserting into elasticSearch with record count ${jsonBody.length}`);
 
         //empty array as we already inserted data in elasticsearch
         jsonBody.length = 0;
