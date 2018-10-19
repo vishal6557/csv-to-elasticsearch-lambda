@@ -1,0 +1,14 @@
+{
+    "name": "lambda",
+    "version": "1.0.0",
+    "description": "sample tutorial",
+    "main": "index.js",
+    "dependencies": {
+        "aws-sdk": "^2.331.0",
+        "elasticsearch": "^15.1.1",
+        "event-stream": "^4.0.1",
+        "http-aws-es": "^6.0.0",
+        "split": "^1.0.1"
+    },
+    "author": "Vishal Diyora"
+}
