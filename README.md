@@ -4,7 +4,7 @@ Process csv and insert into elasticsearch lambda function
 
 Make sure you have following environment variable in lambda:
 
-- ACESS_KEY
+- ACCESS_KEY
 
 - SECRET_KEY
 
